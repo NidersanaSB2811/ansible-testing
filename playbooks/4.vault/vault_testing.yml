@@ -39,15 +39,17 @@
         # name: python3-passlib
         # state: present
       # become: yes #to install  as root 
-    - name: Ensure python3 and passlib are installed on target hosts
-      apt:
-        name:
-          - python3
-          - python3-pip
-          - python3-passlib
-        state: present
-        update_cache: yes
-      become: yes
+    # - name: Ensure python3 and passlib are installed on target hosts
+      # apt:
+        # name:
+          # - python3
+          # - python3-pip
+          # - python3-passlib
+        # state: present
+        # update_cache: yes
+      # become: yes
+    - name:
+      apt: "pkg=python-passlib state=installed"
     
     - name: Copy Encrypted File To /tmp
       copy:
