@@ -64,9 +64,14 @@
         # executable: pip3
       # become: yes
     # 
-    - name: Install python3-passlib using raw
+    # - name: Install python3-passlib using raw
+      # raw: |
+        # sudo apt update -y && sudo apt install -y python3-passlib
+    - name: Install python3-passlib via raw (safe method)
       raw: |
-        sudo apt update -y && sudo apt install -y python3-passlib
+        apt-get update -y
+        DEBIAN_FRONTEND=noninteractive apt-get install -y python3-passlib
+      become: yes
     
     - name: Copy Encrypted File To /tmp
       copy:
