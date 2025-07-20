@@ -10,5 +10,3 @@ variable "environment" { type = string }
 variable "instance_type" { type = map(any) }
 variable "projid" { type = string }
 variable "imagename" { type = string }
-
-

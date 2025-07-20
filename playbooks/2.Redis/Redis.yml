@@ -84,8 +84,9 @@
       when: redis_status.rc != 0
 
     - name: Checking Delegate Option
-      shell: hostname
-      delegate_to: localhost
+      shell: hostname #Runs the command to get the current machine's hostname
+      delegate_to: localhost #	Forces the task to run locally, not on the remote host
+
 
   handlers:
     - name: Backup Redis Conf File
