@@ -48,8 +48,21 @@
         # state: present
         # update_cache: yes
       # become: yes
-    - name:
-      apt: "pkg=python-passlib state=installed"
+    # - name:
+      # apt: "pkg=python-passlib state=installed"
+    
+    - name: Ensure pip is installed on the target
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
+      become: yes
+    
+    - name: Install passlib using pip3
+      pip:
+        name: passlib
+        executable: pip3
+      become: yes
     
     - name: Copy Encrypted File To /tmp
       copy:
