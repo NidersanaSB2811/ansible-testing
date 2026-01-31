@@ -5,11 +5,11 @@ key_name             = "ans-con"
 public_subnet_cidrs  = ["10.37.1.0/24", "10.37.2.0/24", "10.37.3.0/24"]    #List
 private_subnet_cidrs = ["10.37.10.0/24", "10.37.20.0/24", "10.37.30.0/24"] #List
 azs                  = ["us-east-1a", "us-east-1b", "us-east-1c"]          #List
-environment          = "production"
+environment          = "development"
 instance_type = {
   development = "t2.small"
   testing     = "t2.small"
-  production  = "t2.small"
+  production  = "t3.small"
 }
 amis = {
   us-east-1 = "ami-020cba7c55df1f615" # Canonical, Ubuntu, 20.04 LTS, amd64 focal image
