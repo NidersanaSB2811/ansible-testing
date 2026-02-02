@@ -1,48 +1,104 @@
-#Ansible Topics
-0. Enable call backs in ansible.cfg 
-   [defaults]
-   callbacks_enabled = timer, profile_tasks, profile_roles
-   #The above provided playbook and task execution time which can allow us to identiy slow running playbooks.
-   Enable Ansible Log in export ANSIBLE_LOG_PATH=~/ansible.log
-   export ANSIBLE_DEBUG=True
 
-1. Adhoc commands *
-   ansible -i invfile pvt -m ping
-   ansible -i invfile pvt -m shell -a "df -h"
-   ansible -i invfile pvt -m shell -a "df -h | grep -i /dev/root" -vvvv
-   ansible -i invfile server01:server02 -m shell -a "df -h | grep -i /dev/root"
-   ansible -i invfile 'all:!server01' -m shell -a "df -h | grep -i /dev/root"
-   ansible -i invfile 'all:&megastar' -m shell -a "df -h | grep -i /dev/root"
-   ansible -i invfile2 'all:&megastar' -m shell -a "df -h | grep -i /dev/root"
-   ansible -i invfile pvt -m user -a "name=superstar state=present" --become
-   ansible -i invfile pvt -m shell -a "cat /etc/passwd | grep -i superstar"
-   ansible -i invfile pvt -m setup #Prints ansible_facts for clients
-   
-2. with_items for running iterations. *
-3. when condition *
-4. Register output & return code using rc *
-5. Ansible facts using Redis & Notify & Handlers & get_url & unarchive modules in redis   playbook.
-* * * * * ansible -i /root/ansiblecode/invfile all -m setup
-If you are unable to connect to clients, then redis is also be a issue. Disable redis config and try again.
+---
 
-6. Copy, File, No_Log, Debug *
-7. Verbosity using -vvvv
-9. ignore_errors: true *
-10. block, rescue & always
-11. Vault Encrypt String and File for aws_creds *
-12. shell & command modules *
-13. become_user *
-15. serial option select how many machine can run at a time. serial 1 will run  
-    on   one machine only. *
-16. lineinfile *
-17. Docker Swarm Configuration *
-18. Set-fact *
-19. --extra-vars ansible_user='ubuntu' 
-20. fetch
-21. tags *
-22. Jinja Templates *
-23. Pre & Post Tasks *
-24. Roles and Ansible Galaxy *
-25. Dynamic Inventory
-26. AWX
+# Ansible & Terraform Infrastructure Practice
+
+This repository captures my hands-on learning with AWS, Terraform, and Ansible, focused on understanding how infrastructure is provisioned using Terraform and how configuration management and automation are applied on multiple Linux and Windows EC2 instances using Ansible.
+
+![AWS](https://img.shields.io/badge/AWS-Cloud-232F3E?logo=amazonaws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-Infrastructure_as_Code-844FBA?logo=terraform&logoColor=white)
+![Ansible](https://img.shields.io/badge/Ansible-Configuration_Management-EE0000?logo=ansible&logoColor=white)
+![EC2](https://img.shields.io/badge/Amazon_EC2-Compute-FF9900?logo=amazonec2&logoColor=white)
+![VPC](https://img.shields.io/badge/Amazon_VPC-Networking-0073BB)
+![DynamicInventory](https://img.shields.io/badge/Ansible-Dynamic_Inventory-1F6FEB)
+![alt text](image.png)
+
+## Overview
+
+The project emphasizes:
+
+* Using **Terraform** to provision AWS infrastructure
+* Using **Ansible** to manage and test configuration on the provisioned EC2 instances
+* Understanding how **infrastructure provisioning and configuration management** work together in real environments
+
+Rather than building a complex application, the goal was to **learn core cloud and automation concepts by implementing them end to end**.
+
+---
+
+## What This Project Implements
+
+Through this implementation, I worked on:
+
+* Provisioning AWS infrastructure using **Terraform**
+* Automating configuration and testing using **Ansible**
+* Connecting Terraform outputs with Ansible inventories
+* Managing EC2 instances across public and private networks
+
+---
+
+## Key Learnings & Implementations
+
+### AWS & Networking
+
+* Created **VPCs** with proper CIDR planning
+* Implemented **public and private subnets** across Availability Zones
+* Configured **route tables** and subnet associations
+* Used **Internet Gateways** and **NAT Gateways** for controlled connectivity
+* Understood **VPC peering** and its routing behavior
+* Learned how private IP addressing is used for internal communication
+
+---
+
+### Terraform (Infrastructure as Code)
+
+* Provisioned AWS resources using **Terraform**
+* Used:
+
+  * Variables and tfvars
+  * Locals
+  * Outputs
+  * Functions such as `templatefile()` and `path.module`
+* Managed **remote Terraform state using an S3 backend**
+* Understood Terraform’s **state file and dependency graph**
+* Dynamically generated configuration files for Ansible
+* Maintained repeatable and consistent infrastructure deployments
+
+---
+
+### Ansible (Configuration & Automation)
+
+* Set up an **Ansible controller EC2 instance**
+* Configured `ansible.cfg` for automation-friendly execution
+* Used **Terraform-generated inventory files** with Ansible
+* Ran **ad-hoc Ansible commands** against EC2 instances
+* Understood:
+
+  * Controller vs managed nodes
+  * SSH-based access and key management
+  * Use of public vs private IPs
+  * Host key checking and connection behavior
+* Verified connectivity and configuration across instances
+
+---
+
+## Why Terraform and Ansible Together
+
+Using Terraform and Ansible together helped me understand how:
+
+* Infrastructure provisioning and configuration are **separate but complementary**
+* Terraform defines **what infrastructure exists**
+* Ansible defines **how systems are configured**
+* Automation reduces manual effort and configuration drift
+
+This project helped bridge the gap between **theoretical DevOps concepts** and **practical cloud implementation**.
+
+---
+
+## Purpose of This Repository
+
+* Practice AWS networking and automation fundamentals
+* Learn Terraform and Ansible through hands-on implementation
+* Understand real-world infrastructure and configuration workflows
+
+---
 
