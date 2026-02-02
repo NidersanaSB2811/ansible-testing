@@ -94,6 +94,56 @@ This project helped bridge the gap between **theoretical DevOps concepts** and *
 
 ---
 
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+## Verifying Ansible Connectivity
+
+After provisioning the infrastructure and generating the inventory, Ansible connectivity to the managed EC2 instances was verified using an ad-hoc command.
+
+### Command Used
+
+```bash
+ansible -i invfile pvt -m ping
+root@ip-10-0-6-56:~/ansible-testing# ansible -i invfile pvt -m ping
+[WARNING]: Platform linux on host testserver02 is using the discovered Python
+interpreter at /usr/bin/python3.12, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.18/reference_appendices/interpreter_discovery.html for more information.
+testserver02 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.12"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+[WARNING]: Platform linux on host testserver01 is using the discovered Python
+interpreter at /usr/bin/python3.12, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.18/reference_appendices/interpreter_discovery.html for more information.
+testserver01 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.12"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+[WARNING]: Platform linux on host testserver03 is using the discovered Python
+interpreter at /usr/bin/python3.12, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.18/reference_appendices/interpreter_discovery.html for more information.
+testserver03 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3.12"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+root@ip-10-0-6-56:~/ansible-testing#
+
 ## Purpose of This Repository
 
 * Practice AWS networking and automation fundamentals
